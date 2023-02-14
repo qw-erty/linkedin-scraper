@@ -10,6 +10,7 @@ driver = webdriver.Chrome('F:\installations\chromedriver_win32\chromedriver.exe'
 
 options = webdriver.ChromeOptions()
 options.add_experimental_option('excludeSwitches', ['enable-logging'])
+options.add_argument('--headless')
 driver = webdriver.Chrome(options=options)
 
 # Replace the LinkedIn profile URL with your own LinkedIn profile URL
@@ -23,8 +24,11 @@ wait_time = 20
 # Wait for the page to load
 driver.implicitly_wait(20)
 
-wait = WebDriverWait(driver, wait_time)
-wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "#public_profile_contextual-sign-in > div > section > button")))
+try:     
+    wait = WebDriverWait(driver, wait_time)
+    wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "#public_profile_contextual-sign-in > div > section > button")))
+except:
+    print("cross not found reload")
 
 
 # Click the button using its CSS selector
